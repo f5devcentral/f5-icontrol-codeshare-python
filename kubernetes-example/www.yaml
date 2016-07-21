@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: www
+  name: www
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: www
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: www
+    spec:
+      containers:
+      - env:
+        - name: F5DEMO_NODENAME
+          value: www
+        - name: F5DEMO_COLOR
+          value: adafaf
+        image: erchen/f5demo:latest
+        imagePullPolicy: IfNotPresent
+        name: www
+        ports:
+        - containerPort: 80
+          protocol: TCP
