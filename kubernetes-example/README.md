@@ -7,6 +7,8 @@ Example of using Python to query the Kubernetes API and create LTM/DNS objects u
 
 This script will fetch data from Kubernetes to configure a BIG-IP.
 
+Related DevCentral Article: [F5 Python SDK and Kubernetes](https://devcentral.f5.com/articles/f5-python-sdk-and-kubernetes-21045)
+
 Currently will:
  * Retrieve Service, Ingress, Pods from Kubernetes
 
