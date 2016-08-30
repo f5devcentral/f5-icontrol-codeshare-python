@@ -1,0 +1,308 @@
+generation: 1
+isF5Example: false
+kind: cm:cloud:provider:templates:iapp:provideriapptemplateworkerstate
+lastUpdateMicros: 1472266482143812
+overrides:
+  tables:
+  - columns:
+    - {description: 'CIDR Block:', isRequired: false, name: CIDRRange, provider: ''}
+    description: 'Security: Firewall: Static Blacklisted Addresses (CIDR Format)'
+    name: feature__easyL4FirewallBlacklist
+  - columns:
+    - {description: 'CIDR Block:', isRequired: false, name: CIDRRange, provider: 0.0.0.0/0}
+    description: 'Security: Firewall: Static Allowed Source Addresses (CIDR Format)'
+    name: feature__easyL4FirewallSourceList
+  - columns:
+    - {defaultValue: '', description: 'Group:', isRequired: false, name: Group}
+    - {defaultValue: '', description: 'Parameter:', isRequired: false, name: Parameter}
+    - {description: 'Target:', isRequired: false, name: Target, provider: forward/request/select/pool}
+    description: 'L7 Policy: Rules: Action'
+    name: l7policy__rulesAction
+  - columns:
+    - {description: 'Case Sensitive:', isRequired: false, name: CaseSensitive, provider: 'no'}
+    - {description: 'Condition:', isRequired: false, name: Condition, provider: equals}
+    - {defaultValue: '', description: 'Group:', isRequired: false, name: Group}
+    - {description: 'Missing:', isRequired: false, name: Missing, provider: 'no'}
+    - {description: 'Negate:', isRequired: false, name: Negate, provider: 'no'}
+    - {description: 'Operand:', isRequired: false, name: Operand, provider: http-host/request/host}
+    - {defaultValue: '', description: 'Value:', isRequired: false, name: Value}
+    description: 'L7 Policy: Rules: Matching'
+    name: l7policy__rulesMatch
+  - columns:
+    - {description: 'Adv Options:', isRequired: false, name: AdvOptions, provider: ''}
+    - {description: 'Connection Limit:', isRequired: false, name: ConnectionLimit,
+      provider: '0'}
+    - {defaultValue: '', description: 'IP/Node Name:', isRequired: false, name: IPAddress}
+    - {defaultValue: '0', description: 'Pool Idx:', isRequired: false, name: Index,
+      validator: NonNegativeNumber}
+    - {description: 'Port:', isRequired: false, name: Port, provider: '80'}
+    - {defaultValue: '0', description: 'Priority Group:', isRequired: false, name: PriorityGroup}
+    - {description: 'Ratio:', isRequired: false, name: Ratio, provider: '1'}
+    - {defaultValue: enabled, description: 'State:', isRequired: false, name: State}
+    description: 'Pool: Members'
+    name: pool__Members
+  - columns:
+    - {description: 'Adv Options:', isRequired: false, name: AdvOptions, provider: min-active-members=1}
+    - {description: 'Description:', isRequired: false, name: Description, provider: ''}
+    - {defaultValue: '0', description: 'Index:', isRequired: false, name: Index, providerType: PORT,
+      validator: NonNegativeNumber}
+    - {description: 'LB Method:', isRequired: false, name: LbMethod, provider: round-robin}
+    - {defaultValue: '', description: 'Monitor(s):', isRequired: false, name: Monitor}
+    - {defaultValue: '', description: 'Name:', isRequired: false, name: Name}
+    description: 'Pool: Pool Table'
+    name: pool__Pools
+    serverTier: pcfdev-app
+  - columns:
+    - {description: Destination, isRequired: false, name: Destination, provider: ''}
+    - {description: 'Listener:', isRequired: false, name: Listener, provider: ''}
+    description: 'Virtual Server: Additional Listeners'
+    name: vs__Listeners
+  - columns:
+    - {defaultValue: '0', description: 'Index:', isRequired: false, name: Index, validator: NonNegativeNumber}
+    - {defaultValue: '', description: 'Name:', isRequired: false, name: Name}
+    - {defaultValue: '', description: 'Options:', isRequired: false, name: Options}
+    - {description: 'Type:', isRequired: false, name: Type, provider: http}
+    description: 'Monitor: Monitor Table'
+    name: monitor__Monitors
+  vars:
+  - {description: 'Extensions: Field 1', displayName: Field1, isRequired: false, name: extensions__Field1,
+    provider: ''}
+  - {description: 'Extensions: Field 2', displayName: Field2, isRequired: false, name: extensions__Field2,
+    provider: ''}
+  - {description: 'Extensions: Field 3', displayName: Field3, isRequired: false, name: extensions__Field3,
+    provider: ''}
+  - choices:
+    - {description: auto, value: auto}
+    - {description: base, value: base}
+    - {description: base+ip_blacklist_block, value: base+ip_blacklist_block}
+    - {description: base+ip_blacklist_log, value: base+ip_blacklist_log}
+    - {description: disabled, value: disabled}
+    description: 'Security: Firewall: Configure L4 Firewall Policy'
+    displayName: easyL4Firewall
+    isRequired: false
+    name: feature__easyL4Firewall
+    provider: auto
+  - choices:
+    - {description: auto, value: auto}
+    - {description: enabled, value: enabled}
+    - {description: disabled, value: disabled}
+    description: 'HTTP: Insert X-Forwarded-For Header'
+    displayName: insertXForwardedFor
+    isRequired: false
+    name: feature__insertXForwardedFor
+    provider: auto
+  - choices:
+    - {description: auto, value: auto}
+    - {description: enabled, value: enabled}
+    - {description: disabled, value: disabled}
+    description: 'HTTP: Security: Create HTTP(80)->HTTPS(443) Redirect'
+    displayName: redirectToHTTPS
+    isRequired: false
+    name: feature__redirectToHTTPS
+    provider: disabled
+  - choices:
+    - {description: disabled, value: disabled}
+    - {description: enabled, value: enabled}
+    - {description: enabled-preload, value: enabled-preload}
+    - {description: enabled-subdomain, value: enabled-subdomain}
+    - {description: enabled-preload-subdomain, value: enabled-preload-subdomain}
+    description: 'HTTP: Security: Enable HTTP Strict Transport Security (only valid
+      if ClientSSL is configured)'
+    displayName: securityEnableHSTS
+    isRequired: false
+    name: feature__securityEnableHSTS
+    provider: disabled
+  - choices:
+    - {description: compatible, value: compatible}
+    - {description: medium, value: medium}
+    - {description: high, value: high}
+    - {description: tls_1.2, value: tls_1.2}
+    - {description: tls_1.1+1.2, value: tls_1.1+1.2}
+    - {description: disabled, value: disabled}
+    description: 'TLS/SSL: Easy Cipher String (overrides VS section setting)'
+    displayName: sslEasyCipher
+    isRequired: false
+    name: feature__sslEasyCipher
+    provider: disabled
+  - choices:
+    - {description: auto, value: auto}
+    - {description: enabled, value: enabled}
+    - {description: disabled, value: disabled}
+    description: 'HTTP: Stats Reporting'
+    displayName: statsHTTP
+    isRequired: false
+    name: feature__statsHTTP
+    provider: auto
+  - choices:
+    - {description: auto, value: auto}
+    - {description: enabled, value: enabled}
+    - {description: disabled, value: disabled}
+    description: 'TLS/SSL: Stats Reporting'
+    displayName: statsTLS
+    isRequired: false
+    name: feature__statsTLS
+    provider: disabled
+  - choices:
+    - {description: preserve-bypass, value: preserve-bypass}
+    - {description: preserve-block, value: preserve-block}
+    - {description: redeploy-bypass, value: redeploy-bypass}
+    - {description: redeploy-block, value: redeploy-block}
+    description: 'iApp: APM: Deployment Mode'
+    displayName: apmDeployMode
+    isRequired: false
+    name: iapp__apmDeployMode
+    provider: preserve-bypass
+  - choices:
+    - {description: enabled, value: enabled}
+    - {description: disabled, value: disabled}
+    description: 'iApp: Statistics Handler Creation'
+    displayName: appStats
+    isRequired: false
+    name: iapp__appStats
+    provider: enabled
+  - choices:
+    - {description: preserve-bypass, value: preserve-bypass}
+    - {description: preserve-block, value: preserve-block}
+    - {description: redeploy-bypass, value: redeploy-bypass}
+    - {description: redeploy-block, value: redeploy-block}
+    description: 'iApp: ASM: Deployment Mode'
+    displayName: asmDeployMode
+    isRequired: false
+    name: iapp__asmDeployMode
+    provider: preserve-bypass
+  - {description: 'iApp: Log Level', displayName: logLevel, isRequired: false, name: iapp__logLevel,
+    provider: '7'}
+  - {description: 'iApp: Mode', displayName: mode, isRequired: false, name: iapp__mode,
+    provider: auto}
+  - {description: 'iApp: Route Domain', displayName: routeDomain, isRequired: false,
+    name: iapp__routeDomain, provider: auto}
+  - choices:
+    - {description: enabled, value: enabled}
+    - {description: disabled, value: disabled}
+    description: 'iApp: Strict Updates'
+    displayName: strictUpdates
+    isRequired: false
+    name: iapp__strictUpdates
+    provider: enabled
+  - {description: 'L7 Policy: Default ASM Policy', displayName: defaultASM, isRequired: false,
+    name: l7policy__defaultASM, provider: bypass}
+  - {description: 'L7 Policy: Default L7 DoS Policy', displayName: defaultL7DOS, isRequired: false,
+    name: l7policy__defaultL7DOS, provider: bypass}
+  - {description: 'L7 Policy: Match Strategy', displayName: strategy, isRequired: false,
+    name: l7policy__strategy, provider: /Common/first-match}
+  - {description: 'Virtual Server: Default Pool Index', displayName: DefaultPoolIndex,
+    isRequired: false, name: pool__DefaultPoolIndex, provider: '0', validator: NonNegativeNumber}
+  - {description: 'Pool: Member Default Port', displayName: MemberDefaultPort, isRequired: false,
+    name: pool__MemberDefaultPort, provider: '80'}
+  - {description: 'Virtual Server: Address', displayName: addr, isRequired: true,
+    name: pool__addr, provider: 10.1.10.100, providerType: NODE, serverTier: pcfdev-app,
+    validator: IpAddress}
+  - {description: 'Virtual Server: Mask', displayName: mask, isRequired: true, name: pool__mask,
+    provider: 255.255.255.255, validator: IpAddress}
+  - {description: 'Virtual Server: Port', displayName: port, isRequired: true, name: pool__port,
+    provider: '80', providerType: PORT, serverTier: pcfdev-app, validator: PortNumber}
+  - {description: 'Virtual Server: Advanced Options', displayName: AdvOptions, isRequired: false,
+    name: vs__AdvOptions, provider: ''}
+  - {description: 'Virtual Server: Advanced Policies', displayName: AdvPolicies, isRequired: false,
+    name: vs__AdvPolicies, provider: ''}
+  - {description: 'Virtual Server: Advanced Profiles', displayName: AdvProfiles, isRequired: false,
+    name: vs__AdvProfiles, provider: ''}
+  - {description: 'Virtual Server: Bundled Items', displayName: BundledItems, isRequired: false,
+    name: vs__BundledItems, provider: ''}
+  - {description: 'Virtual Server: Virtual Server Connection Limit (0=unlimited)',
+    displayName: ConnectionLimit, isRequired: false, name: vs__ConnectionLimit, provider: '0'}
+  - {description: 'Virtual Server: Description', displayName: Description, isRequired: false,
+    name: vs__Description, provider: ''}
+  - {description: 'Virtual Server: IP Protocol', displayName: IpProtocol, isRequired: false,
+    name: vs__IpProtocol, provider: tcp}
+  - {description: 'Virtual Server: iRules (to specify multiple iRules seperate with
+      a comma ex: irule1,irule2,irule3)', displayName: Irules, isRequired: false,
+    name: vs__Irules, provider: ''}
+  - {description: 'Virtual Server: Name', displayName: Name, isRequired: false, name: vs__Name,
+    provider: pcfdev_app}
+  - choices:
+    - {description: enabled, value: enabled}
+    - {description: disabled, value: disabled}
+    description: 'Virtual Server: Connection Mirroring'
+    displayName: OptionConnectionMirroring
+    isRequired: false
+    name: vs__OptionConnectionMirroring
+    provider: disabled
+  - choices:
+    - {description: preserve, value: preserve}
+    - {description: preserve-strict, value: preserve-strict}
+    - {description: change, value: change}
+    description: 'Virtual Server: Source Port Behavior'
+    displayName: OptionSourcePort
+    isRequired: false
+    name: vs__OptionSourcePort
+    provider: preserve
+  - {description: 'Virtual Server: Access Profile', displayName: ProfileAccess, isRequired: false,
+    name: vs__ProfileAccess, provider: ''}
+  - {description: 'Virtual Server: Analytics Profile', displayName: ProfileAnalytics,
+    isRequired: false, name: vs__ProfileAnalytics, provider: ''}
+  - {description: 'Virtual Server: Client-side L4 Protocol Profile', displayName: ProfileClientProtocol,
+    isRequired: false, name: vs__ProfileClientProtocol, provider: /Common/tcp-wan-optimized}
+  - {description: 'Virtual Server: Client SSL Profile', displayName: ProfileClientSSL,
+    isRequired: false, name: vs__ProfileClientSSL, provider: ''}
+  - {description: 'Virtual Server: Client SSL Advanced Options', displayName: ProfileClientSSLAdvOptions,
+    isRequired: false, name: vs__ProfileClientSSLAdvOptions, provider: ''}
+  - {description: 'Virtual Server: Client SSL Certificate', displayName: ProfileClientSSLCert,
+    isRequired: false, name: vs__ProfileClientSSLCert, provider: ''}
+  - {description: 'Virtual Server: Client SSL Certificate Chain', displayName: ProfileClientSSLChain,
+    isRequired: false, name: vs__ProfileClientSSLChain, provider: ''}
+  - {description: 'Virtual Server: Client SSL Cipher String', displayName: ProfileClientSSLCipherString,
+    isRequired: false, name: vs__ProfileClientSSLCipherString, provider: ''}
+  - {description: 'Virtual Server: Client SSL Key', displayName: ProfileClientSSLKey,
+    isRequired: false, name: vs__ProfileClientSSLKey, provider: ''}
+  - {description: 'Virtual Server: Compression Profile', displayName: ProfileCompression,
+    isRequired: false, name: vs__ProfileCompression, provider: /Common/httpcompression}
+  - {description: 'Virtual Server: Connectivity Profile', displayName: ProfileConnectivity,
+    isRequired: false, name: vs__ProfileConnectivity, provider: ''}
+  - {description: 'Virtual Server: Default Persistence Profile', displayName: ProfileDefaultPersist,
+    isRequired: false, name: vs__ProfileDefaultPersist, provider: /Common/cookie}
+  - {description: 'Virtual Server: Fallback Persistence Profile', displayName: ProfileFallbackPersist,
+    isRequired: false, name: vs__ProfileFallbackPersist, provider: /Common/source_addr}
+  - {description: 'Virtual Server: HTTP Profile', displayName: ProfileHTTP, isRequired: false,
+    name: vs__ProfileHTTP, provider: /Common/http}
+  - {description: 'Virtual Server: OneConnect Profile', displayName: ProfileOneConnect,
+    isRequired: false, name: vs__ProfileOneConnect, provider: /Common/oneconnect}
+  - {description: 'Virtual Server: Per-Request Profile', displayName: ProfilePerRequest,
+    isRequired: false, name: vs__ProfilePerRequest, provider: ''}
+  - {description: 'Virtual Server: Request Logging Profile', displayName: ProfileRequestLogging,
+    isRequired: false, name: vs__ProfileRequestLogging, provider: ''}
+  - {description: 'Virtual Server: Security: DoS Profile', displayName: ProfileSecurityDoS,
+    isRequired: false, name: vs__ProfileSecurityDoS, provider: ''}
+  - {description: 'Virtual Server: IP Blacklist Profile', displayName: ProfileSecurityIPBlacklist,
+    isRequired: false, name: vs__ProfileSecurityIPBlacklist, provider: none}
+  - {description: 'Virtual Server: Security Logging Profiles', displayName: ProfileSecurityLogProfiles,
+    isRequired: false, name: vs__ProfileSecurityLogProfiles, provider: ''}
+  - {description: 'Virtual Server: Server-side L4 Protocol Profile', displayName: ProfileServerProtocol,
+    isRequired: false, name: vs__ProfileServerProtocol, provider: /Common/tcp-lan-optimized}
+  - {description: 'Virtual Server: Server SSL Profile', displayName: ProfileServerSSL,
+    isRequired: false, name: vs__ProfileServerSSL, provider: ''}
+  - choices:
+    - {description: disabled, value: disabled}
+    - {description: all_vs, value: all_vs}
+    - {description: any_vs, value: any_vs}
+    - {description: always, value: always}
+    description: 'Virtual Server: Route Advertisement'
+    displayName: RouteAdv
+    isRequired: false
+    name: vs__RouteAdv
+    provider: disabled
+  - {description: 'Virtual Server: SNAT Configuration (enter SNAT pool name, ''automap''
+      or leave blank to disable SNAT)', displayName: SNATConfig, isRequired: false,
+    name: vs__SNATConfig, provider: automap}
+  - {description: 'Virtual Server: Source Address', displayName: SourceAddress, isRequired: false,
+    name: vs__SourceAddress, provider: 0.0.0.0/0}
+  - {description: 'Virtual Address: Advanced Options', displayName: VirtualAddrAdvOptions,
+    isRequired: false, name: vs__VirtualAddrAdvOptions, provider: ''}
+  - {description: Enable health and performance monitoring., displayName: app_stats,
+    isRequired: false, name: app_stats, provider: enabled}
+parentReference: {link: 'https://localhost/mgmt/cm/cloud/templates/iapp/appsvcs_integration_v2.0_001'}
+properties:
+- {id: cloudConnectorReference, isRequired: true}
+selfLink: https://localhost/mgmt/cm/cloud/provider/templates/iapp/dora_template_v1.0
+templateName: dora_template_v1.0
+tenantTemplateReference: {link: 'https://localhost/mgmt/cm/cloud/tenant/templates/iapp/dora_template_v1.0'}
