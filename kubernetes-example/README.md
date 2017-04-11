@@ -3,6 +3,14 @@ Kubernetes Service Load Balancer / Ingress
 
 Example of using Python to query the Kubernetes API and create LTM/DNS objects using iControl REST.
 
+### Update April 2017 
+
+Please see: 
+ * http://clouddocs.f5.com/containers/v1/kubernetes/
+ * https://github.com/F5Networks/k8s-bigip-ctlr
+
+There is now an F5 Supported Container Connector for using Kubernetes.  The following is not related to the Container Connector.
+
 ### About
 
 This script will fetch data from Kubernetes to configure a BIG-IP.
