@@ -7,13 +7,13 @@ Uses F5 APM to retrieve SAML token and generate STS token to be used with AWS CL
 
 ### References
 
-https://devcentral.f5.com/codeshare/saas-federation-iapp
-https://aws.amazon.com/blogs/security/how-to-implement-federated-api-and-cli-access-using-saml-2-0-and-ad-fs/
+  * https://devcentral.f5.com/codeshare/saas-federation-iapp
+  * https://aws.amazon.com/blogs/security/how-to-implement-federated-api-and-cli-access-using-saml-2-0-and-ad-fs/
 
 ### Requirements
 
-  Python
-  F5 APM
+  * Python
+  * F5 APM
 
 ### Usage
 
