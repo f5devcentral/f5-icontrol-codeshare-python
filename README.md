@@ -17,5 +17,5 @@ Prerequisites
 
 ### Further Documentation
 
-* iControlREST: https://devcentral.f5.com/wiki/iControlREST.HomePage.ashx
+* iControlREST: https://clouddocs.f5.com/api/icontrol-rest/
 * F5 Python SDK: https://github.com/F5Networks/f5-common-python
